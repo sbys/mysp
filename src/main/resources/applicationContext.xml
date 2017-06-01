@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="dboperate" class="dataoperate.DBOperate"></bean>
+    <bean id="run" class="dataoperate.test">
+        <property name="iDataOperate" ref="dboperate"></property>
+    </bean>
+    <bean id="hello_imple" class="pro.hello_Imple"></bean>
+    <bean id="advice" class="pro.MyMethod"></bean>
+    <bean id="my_proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>pro.hello</value>
+        </property>
+        <property name="target" ref="hello_imple"></property>
+        <property name="interceptorNames">
+            <list>
+                <value>advice</value>
+            </list>
+        </property>
+    </bean>
+</beans>
